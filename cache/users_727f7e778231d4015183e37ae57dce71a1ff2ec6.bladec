@@ -1,0 +1,58 @@
+<?php $_shouldextend[1]=1; ?>
+<?php $this->startSection('content'); ?>
+ <section class="user-cards-section">
+ <?php if(isAuthorized()): ?>
+ <h1>Manage users</h1>
+ <div class="flex-users-choice">
+ <p class="show-managers active-filter">Managers</p>
+ <p class="show-agents">Agents</p>
+ <p class="show-users">Users</p>
+ </div>
+ <?php if(!empty($managers)): ?>
+ <article id="show-managers" class="">
+ <h2>Managers</h2>
+ <div class="cards-wrapper">
+ <?php  $this->startComponent('components.user_card', ['users' => $managers]); ?>
+ <?php echo $this->renderComponent(); ?>
+ </div>
+ </article>
+ <?php endif; ?>
+ <?php if(!empty($agents)): ?>
+ <article id="show-agents" class="d-none">
+ <h2>Agents</h2>
+ <div class="cards-wrapper">
+ <?php  $this->startComponent('components.user_card', ['users' => $agents]); ?>
+ <?php echo $this->renderComponent(); ?>
+ </div>
+ </article>
+ <?php endif; ?>
+ <?php if(!empty($users)): ?>
+ <article id="show-users" class="d-none">
+ <h2>Users</h2>
+ <div class="cards-wrapper">
+ <?php  $this->startComponent('components.user_card', ['users' => $users]); ?>
+ <?php echo $this->renderComponent(); ?>
+ </div>
+ </article>
+ <?php endif; ?>
+ <?php endif; ?>
+ <?php if(isAuthorized(null, ['manager'])): ?>
+ <h1>Manage agents</h1>
+ <div class="wrapper agent">
+ <h3 class="show-property-form" aria-label="Open agent form window"><span>Create an agent account</span></h3>
+ <div class="property-form-backdrop d-none">
+ <div class="property-form-modal">
+ <?php  $this->startComponent('components.agent_form'); ?>
+ <?php echo $this->renderComponent(); ?>
+ </div>
+ </div>
+ <?php if(!empty($agents)): ?>
+ <?php  $this->startComponent('components.agent_card'); ?>
+ <?php echo $this->renderComponent(); ?>
+ <?php endif; ?>
+ </div>
+ <?php endif; ?>
+ </section>
+<?php $this->stopSection(); ?>
+
+<?php if (isset($_shouldextend[1])) { echo $this->runChild('layouts.layout'); } ?>

@@ -1,0 +1,40 @@
+<article>
+ <div class="detail-container">
+ <div class="slider">
+ <?php if(count($image_src) > 1): ?>
+ <i class="fa-solid fa-circle-arrow-left prev" aria-label="Previous image"></i>
+ <i class="fa-solid fa-circle-arrow-right next" aria-label="Next image"></i>
+ <?php endif; ?>
+ <?php $__currentLoopData = $image_src; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $number => $src): $loop = $this->incrementLoopIndices();  ?>
+ <div class="slide <?php echo \htmlentities($number === 1 ? 'active' : 'd-none'??'', ENT_QUOTES, 'UTF-8', false); ?>" id="slide_<?php echo \htmlentities($number??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <img src="<?php echo \htmlentities($src??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="<?php echo \htmlentities($property->title??'', ENT_QUOTES, 'UTF-8', false); ?>_<?php echo \htmlentities($number??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ id="image_<?php echo \htmlentities($number??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ </div>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+ <div class="detail-info-box">
+ <h2><?php echo \htmlentities($property->title??'', ENT_QUOTES, 'UTF-8', false); ?></h2>
+ <p>Reference : <?php echo \htmlentities($property->reference??'', ENT_QUOTES, 'UTF-8', false); ?></p>
+ <div class="detail-flex-info">
+ <p><?php echo \htmlentities(ucfirst($property->type)??'', ENT_QUOTES, 'UTF-8', false); ?></p>
+ <p><?php echo \htmlentities(ucfirst($property->city)??'', ENT_QUOTES, 'UTF-8', false); ?> (<?php echo \htmlentities($property->zip??'', ENT_QUOTES, 'UTF-8', false); ?>)</p>
+ </div>
+ <div class="detail-flex-info">
+ <p><?php echo \htmlentities(number_format($property->price, 0, ',', ' ')??'', ENT_QUOTES, 'UTF-8', false); ?> €</p>
+ <p><?php echo \htmlentities($property->offer??'', ENT_QUOTES, 'UTF-8', false); ?></p>
+ </div>
+ <div class="info-row">
+ <p><i class="fa-solid fa-house"></i> <?php echo \htmlentities(number_format($property->int_surface, 0, ',', ' ')??'', ENT_QUOTES, 'UTF-8', false); ?>m²</p>
+ <?php if((int) $property->ext_surface !== 0): ?>
+ <p><i class="fa-solid fa-tree"></i> <?php echo \htmlentities(number_format($property->ext_surface, 0, ',', ' ')??'', ENT_QUOTES, 'UTF-8', false); ?>m²</p>
+ <?php endif; ?>
+ <p><i class="fa-solid fa-bed"></i> <?php echo \htmlentities($property->rooms??'', ENT_QUOTES, 'UTF-8', false); ?> rooms</p>
+ </div>
+ </div>
+ </div>
+ <div class="description-box">
+ <h3>Description</h3>
+ <p><?php echo \htmlentities($property->description??'', ENT_QUOTES, 'UTF-8', false); ?></p>
+ </div>
+</article>

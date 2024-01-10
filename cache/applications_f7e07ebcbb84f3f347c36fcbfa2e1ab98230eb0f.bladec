@@ -1,0 +1,16 @@
+<?php $_shouldextend[1]=1; ?>
+<?php $this->startSection('content'); ?>
+ <h1>Pending applications</h1>
+ <div class="cards-wrapper">
+ <?php if(isset($users) && !empty($users)): ?>
+ <?php  $this->startComponent('components.user_card_application'); ?>
+ <?php echo $this->renderComponent(); ?>
+ <?php else: ?>
+ <div class="empty-users">
+ <h2>No pending applications at this time.</h2>
+ </div>
+ <?php endif; ?>
+ </div>
+<?php $this->stopSection(); ?>
+
+<?php if (isset($_shouldextend[1])) { echo $this->runChild('layouts.layout'); } ?>

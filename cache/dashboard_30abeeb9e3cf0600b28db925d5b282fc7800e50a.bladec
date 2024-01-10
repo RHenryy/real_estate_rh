@@ -1,0 +1,8 @@
+<?php $_shouldextend[1]=1; ?>
+<?php $this->startSection('content'); ?>
+ <h1>Dashboard</h1>
+ <?php  $this->startComponent('components.profile_form'); ?>
+ <?php echo $this->renderComponent(); ?>
+<?php $this->stopSection(); ?>
+
+<?php if (isset($_shouldextend[1])) { echo $this->runChild('layouts.layout'); } ?>

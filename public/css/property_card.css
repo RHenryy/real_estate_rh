@@ -1,0 +1,143 @@
+.property-card {
+    width: 90%;
+    background-color: white;
+    margin: 0 auto;
+    border-radius: 15px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+.property-card-image {
+    position: relative;
+}
+.property-card-image img {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    box-shadow: -8px 0 8px -4px rgba(0, 0, 0, 0.2);
+    
+}
+.price-tag {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: #333333;
+    color: white;
+    padding: 0.5rem;
+    width: 50%;
+    text-align: center;
+    font-size: 1.2rem;
+    box-sizing: border-box;
+}
+.property-content {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    padding-bottom: 0.5rem;
+}
+.property-card {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+}
+.address {
+    font-size: 1.1rem;
+    text-align: right;
+}
+.title, .agency-title {
+    font-size: 1.2rem;
+    text-align: center;
+    font-weight: bold;
+}
+.type, .info-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.agency-info {
+    font-weight: bold;
+    text-align: center;
+}
+.agency-info a {
+    color: inherit;
+}
+.button {
+    width: 50%;
+    margin: 0 auto;
+}
+.button a:hover {
+    background-color: black;
+    /* font-weight: bold; */
+}
+.button a {
+    padding: 0.5rem;
+    background-color: #333333;
+    color: white;
+    text-decoration: none;
+    border-radius: 15px;
+    display: block;
+    text-align: center;
+}
+.latest-properties, .latest-agencies {
+    background-color: #d9ccc0;
+    padding: 1rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+}
+.latest-properties h2, .latest-agencies h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    margin-top: 0;
+    font-size: 2rem;
+}
+.about-us a {
+    color: inherit;
+}
+.button-property-edit {
+    margin-top: 1.5rem;
+}
+@media screen and (min-width:780px) {
+    .card-containers {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .property-card {
+        width: 45%;
+    }
+    .title {
+        min-height: 50px;
+    }
+    .price-tag {
+        width: 40%;
+    }
+}
+@media screen and (min-width:1280px) {
+    .card-containers {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .agent-container {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        
+    }
+    .card-container {
+        width: 40%;
+    }
+    .property-card {
+        width: 30%;
+    }
+    .property-card img {
+        height: 30vh;
+    }
+    .latest-properties, .latest-agencies {
+        max-width: 90%;
+        margin: 0 auto;
+        margin-bottom: 3rem;
+    }
+    .price-tag {
+        width: 33%;
+    }
+
+}

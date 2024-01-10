@@ -1,0 +1,9 @@
+<?php $_shouldextend[1]=1; ?>
+<?php $this->startSection('content'); ?>
+ <div class="wrapper">
+ <?php  $this->startComponent('components.register_form'); ?>
+ <?php echo $this->renderComponent(); ?>
+ </div>
+<?php $this->stopSection(); ?>
+
+<?php if (isset($_shouldextend[1])) { echo $this->runChild('layouts.layout'); } ?>

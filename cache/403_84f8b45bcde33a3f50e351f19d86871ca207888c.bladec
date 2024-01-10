@@ -1,0 +1,9 @@
+<?php $_shouldextend[1]=1; ?>
+<?php $this->startSection('content'); ?>
+ <section class="error-container">
+ <h1>403 | NOT AUTHORIZED</h1>
+ <div class="button-redirect-error"><a href="/">Back to home page</a></div>
+ </section>
+<?php $this->stopSection(); ?>
+
+<?php if (isset($_shouldextend[1])) { echo $this->runChild('layouts.layout'); } ?>

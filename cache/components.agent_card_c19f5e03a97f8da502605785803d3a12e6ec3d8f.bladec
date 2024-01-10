@@ -1,0 +1,63 @@
+<div class="agent-container">
+ <?php $__currentLoopData = $agents; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $agent): $loop = $this->incrementLoopIndices();  ?>
+ <div class="card-container agent">
+ <i class="fa-solid fa-circle-xmark agent-mobile fa-2x"></i>
+ <div class="user-image agent">
+ <img src="<?php echo \htmlentities($agent->image??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="Avatar of <?php echo \htmlentities($agent->fname??'', ENT_QUOTES, 'UTF-8', false); ?> <?php echo \htmlentities($agent->lname??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ </div>
+ <div class="card-form agent">
+ <div class="input-group">
+ <p>Firstname :</p>
+ <p><?php echo \htmlentities($agent->user->fname??'', ENT_QUOTES, 'UTF-8', false); ?></p>
+ </div>
+ <div class="input-group">
+ <p>Lastname :</p>
+ <p><?php echo \htmlentities($agent->user->lname??'', ENT_QUOTES, 'UTF-8', false); ?></p>
+ </div>
+ <div class="input-group">
+ <p>Email :</p>
+ <p><a href="mailto:<?php echo \htmlentities($agent->user->email??'', ENT_QUOTES, 'UTF-8', false); ?>"><?php echo \htmlentities($agent->user->email??'', ENT_QUOTES, 'UTF-8', false); ?></a></p>
+ </div>
+ <div class="input-group">
+ <p>Currently assigned properties :</p>
+ </div>
+ <?php $__currentLoopData = $agent->properties; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $agentProp): $loop = $this->incrementLoopIndices();  ?>
+ <div class="input-group">
+ <p><a href="properties/edit/<?php echo \htmlentities($agentProp->property_id??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ title="Edit property <?php echo \htmlentities($agentProp->title??'', ENT_QUOTES, 'UTF-8', false); ?>"><?php echo \htmlentities($agentProp->title??'', ENT_QUOTES, 'UTF-8', false); ?></a></p>
+ <p class="xmark-agent"><a
+ href="users/unassignagent/<?php echo \htmlentities($agent->agent_id??'', ENT_QUOTES, 'UTF-8', false); ?>-<?php echo \htmlentities($agentProp->property_id??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ title="Unassign agent : <?php echo \htmlentities($agent->user->fname??'', ENT_QUOTES, 'UTF-8', false); ?> <?php echo \htmlentities($agent->user->lname??'', ENT_QUOTES, 'UTF-8', false); ?> from <?php echo \htmlentities($agentProp->title??'', ENT_QUOTES, 'UTF-8', false); ?>"><i
+ class="fa-solid fa-xmark"></i></a></p>
+ </div>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ <a href="users/delete/<?php echo \htmlentities($agent->user_id??'', ENT_QUOTES, 'UTF-8', false); ?>"><i class="fa-solid fa-circle-xmark agent fa-2x"></i></a>
+
+ <form action="users/assignagent/<?php echo \htmlentities($agent->agent_id??'', ENT_QUOTES, 'UTF-8', false); ?>" method="post">
+ <label for="agent_property_<?php echo \htmlentities($agent->agent_id??'', ENT_QUOTES, 'UTF-8', false); ?>">Properties to assign</label>
+ <div class="input-group">
+ <select style="width:100%;" name="agent_property[]" id="agent_property_<?php echo \htmlentities($agent->agent_id??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ multiple="multiple">
+ <?php if(isset($agent->assignableProperties) && !empty($agent->assignableProperties)): ?>
+ <?php $__currentLoopData = $agent->assignableProperties; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $assignableProperty): $loop = $this->incrementLoopIndices();  ?>
+ <option value="<?php echo \htmlentities($assignableProperty->property_id??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <?php echo \htmlentities($assignableProperty->title??'', ENT_QUOTES, 'UTF-8', false); ?>
+
+ </option>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ <?php else: ?>
+ <option value="">No property to assign</option>
+ <?php endif; ?>
+ </select>
+ </div>
+ <input type="hidden" name="agent_id" value=<?php echo \htmlentities($agent->agent_id??'', ENT_QUOTES, 'UTF-8', false); ?>>
+ <input type="hidden" name="manager_id" value=<?php echo \htmlentities($agent->manager_id??'', ENT_QUOTES, 'UTF-8', false); ?>>
+ <input type="submit" value="Assign agent to properties">
+ </form>
+ </div>
+ </div>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+</div>

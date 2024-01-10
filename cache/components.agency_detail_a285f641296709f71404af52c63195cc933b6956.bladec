@@ -1,0 +1,33 @@
+<article class="agency-detail-container">
+ <div class="agency-image">
+ <img src="<?php echo \htmlentities($agency->image??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="<?php echo \htmlentities($agency->name??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ </div>
+ <div class="detail-info-box">
+ <p><i class="fa-solid fa-map-location-dot"></i> <?php echo \htmlentities(ucwords($agency->address)??'', ENT_QUOTES, 'UTF-8', false); ?> <?php echo \htmlentities(ucfirst($agency->city)??'', ENT_QUOTES, 'UTF-8', false); ?>
+
+ (<?php echo \htmlentities($agency->zip??'', ENT_QUOTES, 'UTF-8', false); ?>)</p>
+ <p><i class="fa-solid fa-phone"></i> <a
+ href="tel:<?php echo \htmlentities($agency->phone??'', ENT_QUOTES, 'UTF-8', false); ?>"><?php echo \htmlentities(implode(' ', str_split($agency->phone, 2))??'', ENT_QUOTES, 'UTF-8', false); ?></a></p>
+ <p><i class="fa-solid fa-envelope"></i> <a href="mailto:<?php echo \htmlentities($agency->email??'', ENT_QUOTES, 'UTF-8', false); ?>"><?php echo \htmlentities($agency->email??'', ENT_QUOTES, 'UTF-8', false); ?></p></a>
+ <div class="detail-flex-info-agency">
+ <?php if($agency->house_count > 0): ?>
+ <p><?php echo \htmlentities($agency->house_count??'', ENT_QUOTES, 'UTF-8', false); ?> <i class="fa-solid fa-house fa-2x"></i></p>
+ <?php endif; ?>
+ <?php if($agency->appartment_count > 0): ?>
+ <p><?php echo \htmlentities($agency->appartment_count??'', ENT_QUOTES, 'UTF-8', false); ?> <i class="fa-solid fa-building fa-2x"></i></p>
+ <?php endif; ?>
+ <?php if($agency->land_count > 0): ?>
+ <p><?php echo \htmlentities($agency->land_count??'', ENT_QUOTES, 'UTF-8', false); ?> <i class="fa-solid fa-panorama fa-2x"></i></p>
+ <?php endif; ?>
+ </div>
+ <div class="button">
+ <?php if(isAuthorized(null, ['manager']) &&
+ isset($_SESSION['agency_id']) &&
+ $_SESSION['agency_id'] === (int) $agency->agency_id): ?>
+ <a href="agencies/edit/<?php echo \htmlentities($agency->agency_id??'', ENT_QUOTES, 'UTF-8', false); ?>" title="Edit agency">Edit agency</a>
+ <?php elseif(!isAuthorized(null, ['agent'])): ?>
+ <a href="properties/agency/<?php echo \htmlentities($agency->agency_id??'', ENT_QUOTES, 'UTF-8', false); ?>" title="See agency's properties">See properties</a>
+ <?php endif; ?>
+ </div>
+ </div>
+</article>

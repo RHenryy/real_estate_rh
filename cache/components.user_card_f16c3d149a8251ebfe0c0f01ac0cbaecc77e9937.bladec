@@ -1,0 +1,40 @@
+<?php $__currentLoopData = $users; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $user): $loop = $this->incrementLoopIndices();  ?>
+ <div class="card-container">
+ <div class="user-image">
+ <img src="<?php echo \htmlentities($user->image??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="Avatar of <?php echo \htmlentities($user->fname??'', ENT_QUOTES, 'UTF-8', false); ?> <?php echo \htmlentities($user->lname??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ </div>
+ <div class="card-form">
+ <form action="users/update/<?php echo \htmlentities($user->user_id??'', ENT_QUOTES, 'UTF-8', false); ?>" method="post" enctype="multipart/form">
+ <div class="input-group">
+ <label for="fname_<?php echo \htmlentities($user->user_id??'', ENT_QUOTES, 'UTF-8', false); ?>">Firstname :</label>
+ <input type="text" name="update_fname" id="fname_<?php echo \htmlentities($user->user_id??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ value="<?php echo \htmlentities($user->fname??'', ENT_QUOTES, 'UTF-8', false); ?>" required>
+ </div>
+ <div class="input-group">
+ <label for="lname_<?php echo \htmlentities($user->user_id??'', ENT_QUOTES, 'UTF-8', false); ?>">Lastname :</label>
+ <input type="text" name="update_lname" id="lname_<?php echo \htmlentities($user->user_id??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ value="<?php echo \htmlentities($user->lname??'', ENT_QUOTES, 'UTF-8', false); ?>" required>
+ </div>
+ <div class="input-group">
+ <label for="email_<?php echo \htmlentities($user->user_id??'', ENT_QUOTES, 'UTF-8', false); ?>">Email :</label>
+ <input type="email" name="update_email" id="email_<?php echo \htmlentities($user->user_id??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ value="<?php echo \htmlentities($user->email??'', ENT_QUOTES, 'UTF-8', false); ?>" required>
+ </div>
+ <?php if(isset($user->agency->name) && !empty($user->agency->name)): ?>
+ <div class="input-group agency">
+ <p class="ml-0">Agency :</p>
+ <p class="ml-0">
+ <a href="agencies/detail/<?php echo \htmlentities($user->agency_id??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ title="<?php echo \htmlentities($user->agency->name??'', ENT_QUOTES, 'UTF-8', false); ?> detail page"><?php echo \htmlentities($user->agency->name??'', ENT_QUOTES, 'UTF-8', false); ?></a>
+ </p>
+ </div>
+ <?php endif; ?>
+ <div class="card-submit">
+ <input type="submit" value="Update User">
+ </div>
+ </form>
+ <a href="users/delete/<?php echo \htmlentities($user->user_id??'', ENT_QUOTES, 'UTF-8', false); ?>"><i class="fa-solid fa-circle-xmark fa-2x"></i></a>
+ </div>
+ </div>
+<?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>

@@ -1,0 +1,30 @@
+<div class="card-containers">
+ <?php $__currentLoopData = $agencies; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $agency): $loop = $this->incrementLoopIndices();  ?>
+ <?php if($agency->image !== ''): ?>
+ <article class="property-card">
+ <div class="property-card-image">
+ <a href="agencies/detail/<?php echo \htmlentities($agency->agency_id??'', ENT_QUOTES, 'UTF-8', false); ?>" title="See details">
+ <img src="<?php echo \htmlentities($agency->image??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="<?php echo \htmlentities($agency->title??'', ENT_QUOTES, 'UTF-8', false); ?>"></a>
+ </div>
+ <div class="property-content">
+ <div class="agency-title">
+ <p><?php echo \htmlentities($agency->name??'', ENT_QUOTES, 'UTF-8', false); ?></p>
+ </div>
+ <?php if(isAuthorized(null, ['manager', 'agent']) &&
+ isset($_SESSION['agency_id']) &&
+ $_SESSION['agency_id'] === $agency->agency_id): ?>
+ <div class="button">
+ <a href="agencies/edit/<?php echo \htmlentities($agency->agency_id??'', ENT_QUOTES, 'UTF-8', false); ?>" title="Edit agency">Edit
+ agency</a>
+ </div>
+ <?php else: ?>
+ <div class="button">
+ <a href="agencies/detail/<?php echo \htmlentities($agency->agency_id??'', ENT_QUOTES, 'UTF-8', false); ?>" title="See details">See details</a>
+ </div>
+ <?php endif; ?>
+ </div>
+ </article>
+ <?php endif; ?>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+</div>
