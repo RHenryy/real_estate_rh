@@ -1,3 +1,89 @@
+// Form validator class
+class FormValidator {
+  // source:
+  static isEmailValid(input) {
+    const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (!regex.test(input)) {
+      return {
+        status: "danger",
+        text: "Email address is not valid.",
+      };
+    }
+    return {
+      status: "success",
+    };
+  }
+  static isPasswordValid(input, confirmInput) {
+    if (input.length < 8) {
+      return {
+        status: "danger",
+        text: "Password must be at least 8 characters long.",
+      };
+    }
+    const regex =
+      /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).+$/;
+    if (!regex.test(input)) {
+      return {
+        status: "danger",
+        text: "Password must contain at least one uppercase letter, one number and one special character.",
+      };
+    }
+    if (input !== confirmInput) {
+      return {
+        status: "danger",
+        text: "Passwords do not match.",
+        confirminput: true,
+      };
+    }
+    return {
+      status: "success",
+    };
+  }
+}
+// Verify register form inputs on submit
+const form = document.querySelector(".register-form");
+if (form) {
+  const main = document.querySelector("main");
+  let flashMessageDiv = document.createElement("div");
+  let h3 = document.createElement("h3");
+  flashMessageDiv.classList.add("flash-message");
+  flashMessageDiv.appendChild(h3);
+  form.addEventListener("submit", function (e) {
+    const emailInput = document.querySelector("#email");
+    const passwordInput = document.querySelector("#password");
+    const confirmPasswordInput = document.querySelector("#confirm_password");
+    if (FormValidator.isEmailValid(emailInput.value).status === "danger") {
+      e.preventDefault();
+      emailInput.classList.add("input-error");
+      h3.classList.add(FormValidator.isEmailValid(emailInput.value).status);
+      h3.textContent = FormValidator.isEmailValid(emailInput.value).text;
+      main.insertBefore(flashMessageDiv, main.firstChild);
+      return;
+    } else {
+      if (emailInput.classList.contains("input-error")) {
+        emailInput.classList.remove("input-error");
+      }
+    }
+    if (
+      FormValidator.isPasswordValid(
+        passwordInput.value,
+        confirmPasswordInput.value
+      ).status === "danger"
+    ) {
+      e.preventDefault();
+      passwordInput.classList.add("input-error");
+      if (FormValidator.isPasswordValid(passwordInput.value).confirminput) {
+        confirmPasswordInput.classList.add("input-error");
+      }
+      h3.classList.add(
+        FormValidator.isPasswordValid(passwordInput.value).status
+      );
+      h3.textContent = FormValidator.isPasswordValid(passwordInput.value).text;
+      main.insertBefore(flashMessageDiv, main.firstChild);
+      return;
+    }
+  });
+}
 // reveal password
 let revealPassBtn = document.querySelectorAll(".show-pass");
 revealPassBtn.forEach((btn) => {
@@ -13,23 +99,6 @@ revealPassBtn.forEach((btn) => {
     }
   });
 });
-// Verify form inputs on submit
-// const form = document.querySelector("form");
-// const inputs = document.querySelectorAll("input");
-// form.addEventListener("submit", function (e) {
-//   inputs.forEach((input) => {
-//     if (
-//       input.value === "" &&
-//       input.type !== "file" &&
-//       input.name !== "confirm_email" &&
-//       input.name !== "confirm_property" &&
-//       input.name !== "confirm-property"
-//     ) {
-//       e.preventDefault();
-//       input.classList.add("input-error");
-//     }
-//   });
-// });
 // Preview images property form
 const imageInputProperty = document.querySelector("#property_image");
 if (imageInputProperty) {
