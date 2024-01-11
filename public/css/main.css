@@ -39,9 +39,9 @@ p, span {
     font-size: 1.2rem;
     line-height: normal;
 }
-label {
+label, .input-group p {
     font-family: var(--ff-body);
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 .d-none {
     display: none;
@@ -105,6 +105,11 @@ body main {
     flex: 1;
     margin-top: 8rem;
     width: 100%;
+}
+@media screen and (max-width: 479px) {
+    main .wrapper {
+        max-width: 98%;
+    }
 }
 @media screen and (min-width: 480px) {
     main {
@@ -756,7 +761,7 @@ input[type="submit"]:hover {
 /** USER CARDS **/
 
 form select {
-    width: 52.3%;
+    width: 51%;
     padding: 0.5rem;
     text-align: center;
     border-radius: 10px;
@@ -979,8 +984,11 @@ text-decoration: underline;
 .input-group > p:nth-child(1) {
     margin-left: 2rem;
 }
-.input-group > p:nth-child(2) {
+.agent .input-group > p:nth-child(2) {
     margin-right: 2rem;
+}
+.input-group > p:nth-child(2) {
+    
     font-weight: bold;
 }
 .application-submit {

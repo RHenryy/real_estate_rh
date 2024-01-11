@@ -31,8 +31,14 @@ class Managers
     public function cancelSubscription(int $agency_id): void
     {
         if (!is_numeric($agency_id)) redirect(404);
-        if (!isAuthorized(null, ["manager"]) && $_SESSION['agency_id'] !== (int)$agency_id) redirect(403);
+        if (!isAuthorized(null, ["manager"]) || $_SESSION['agency_id'] !== (int)$agency_id) redirect(403);
+        // get agents user_id
+        $agentsToBeDeleted = getInstance("Agent")->fetchAllAgentsByAgency($agency_id);
         if (getInstance("Agency")->delete($agency_id)) {
+            // Delete user accounts of agents
+            foreach ($agentsToBeDeleted as $agent) {
+                getInstance("User")->delete($agent->user_id);
+            }
             getInstance("User")->updateRole(3, $_SESSION['user']->user_id);
             $_SESSION['user']->role = 3;
             $_SESSION['flash_message'] = ["message" => "Subscription cancelled successfully.", "type" => "success"];
