@@ -9,7 +9,7 @@
                 </div>
                 <div class="property-content">
                     <div class="title">
-                        <h3>{{ $property->title }}</h3>
+                        <h2>{{ $property->title }}</h2>
                     </div>
                     @if ($pagename !== 'home')
                         <div class="type">

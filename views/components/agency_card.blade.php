@@ -8,7 +8,7 @@
                 </div>
                 <div class="property-content">
                     <div class="agency-title">
-                        <p>{{ $agency->name }}</p>
+                        <h2>{{ $agency->name }}</h2>
                     </div>
                     @if (isAuthorized(null, ['manager']) && isset($_SESSION['agency_id']) && $_SESSION['agency_id'] === $agency->agency_id)
                         <div class="button">

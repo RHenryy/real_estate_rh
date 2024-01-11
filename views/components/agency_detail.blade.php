@@ -3,11 +3,12 @@
         <img src="{{ $agency->image }}" alt="{{ $agency->name }}">
     </div>
     <div class="detail-info-box">
+        <h2>{{ $agency->name }}</h2>
         <p><i class="fa-solid fa-map-location-dot"></i> {{ ucwords($agency->address) }} {{ ucfirst($agency->city) }}
             ({{ $agency->zip }})</p>
         <p><i class="fa-solid fa-phone"></i> <a
                 href="tel:{{ $agency->phone }}">{{ implode(' ', str_split($agency->phone, 2)) }}</a></p>
-        <p><i class="fa-solid fa-envelope"></i> <a href="mailto:{{ $agency->email }}">{{ $agency->email }}</p></a>
+        <p><i class="fa-solid fa-envelope"></i> <a href="mailto:{{ $agency->email }}">{{ $agency->email }}</a></p>
         <div class="detail-flex-info-agency">
             @if ($agency->house_count > 0)
                 <p>{{ $agency->house_count }} <i class="fa-solid fa-house fa-2x"></i></p>
